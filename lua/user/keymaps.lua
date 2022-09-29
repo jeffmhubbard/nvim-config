@@ -4,8 +4,8 @@ local keymap = vim.keymap.set
 local opts = { silent = true }
 
 --Remap space as leader key
-keymap("", "<Space>", "<Nop>", opts)
-vim.g.mapleader = " "
+--keymap("", "<Space>", "<Nop>", opts)
+--vim.g.mapleader = " "
 
 -- Modes
 --   normal_mode = "n",
@@ -35,6 +35,10 @@ keymap("n", "<S-h>", ":bprevious<CR>", opts)
 -- Clear highlights
 keymap("n", "<leader>h", "<cmd>nohlsearch<CR>", opts)
 
+-- Save buffers
+keymap("n", "<leader>s", ":w<CR>", opts)
+keymap("i", "<leader>s", "<C-c>:w<CR>", opts)
+
 -- Close buffers
 keymap("n", "<S-q>", "<cmd>Bdelete!<CR>", opts)
 
@@ -60,6 +64,16 @@ keymap("n", "<leader>ff", ":Telescope find_files<CR>", opts)
 keymap("n", "<leader>ft", ":Telescope live_grep<CR>", opts)
 keymap("n", "<leader>fp", ":Telescope projects<CR>", opts)
 keymap("n", "<leader>fb", ":Telescope buffers<CR>", opts)
+
+keymap("n", "<leader>1", ":BufferLineGoToBuffer 1<CR>", opts)
+keymap("n", "<leader>2", ":BufferLineGoToBuffer 2<CR>", opts)
+keymap("n", "<leader>3", ":BufferLineGoToBuffer 3<CR>", opts)
+keymap("n", "<leader>4", ":BufferLineGoToBuffer 4<CR>", opts)
+keymap("n", "<leader>5", ":BufferLineGoToBuffer 5<CR>", opts)
+keymap("n", "<leader>6", ":BufferLineGoToBuffer 6<CR>", opts)
+keymap("n", "<leader>7", ":BufferLineGoToBuffer 7<CR>", opts)
+keymap("n", "<leader>8", ":BufferLineGoToBuffer 8<CR>", opts)
+keymap("n", "<leader>9", ":BufferLineGoToBuffer 9<CR>", opts)
 
 -- Git
 keymap("n", "<leader>gg", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", opts)
