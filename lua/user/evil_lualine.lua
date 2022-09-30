@@ -6,17 +6,19 @@ local lualine = require('lualine')
 -- Color table for highlights
 -- stylua: ignore
 local colors = {
-  bg       = '#202328',
-  fg       = '#bbc2cf',
-  yellow   = '#ECBE7B',
-  cyan     = '#008080',
-  darkblue = '#081633',
-  green    = '#98be65',
-  orange   = '#FF8800',
-  violet   = '#a9a1e1',
-  magenta  = '#c678dd',
-  blue     = '#51afef',
-  red      = '#ec5f67',
+  bg        = '#1d2021',
+  fg        = '#d5d5d5',
+  black     = '#383c3e',
+  red       = '#d72638',
+  green     = '#88b92d',
+  orange    = '#eb8413',
+  blue      = '#1e8bac',
+  magenta   = '#be4264',
+  cyan      = '#1ba595',
+  gray      = '#dddddd',
+  dark_gray = '#53585b',
+  yellow    = '#f19d1a',
+  white     = '#e5e5e5',
 }
 
 local conditions = {
@@ -79,72 +81,47 @@ local function ins_right(component)
 end
 
 ins_left {
-  function()
-    return '▊'
-  end,
-  color = { fg = colors.blue }, -- Sets highlighting of component
-  padding = { left = 0, right = 1 }, -- We don't need space before this
-}
-
-ins_left {
   -- mode component
-  function()
-    return ''
-  end,
+  'mode',
   color = function()
     -- auto change color according to neovims mode
     local mode_color = {
-      n = colors.red,
-      i = colors.green,
-      v = colors.blue,
-      [''] = colors.blue,
-      V = colors.blue,
-      c = colors.magenta,
-      no = colors.red,
-      s = colors.orange,
-      S = colors.orange,
+      n      = colors.cyan,
+      i      = colors.white,
+      v      = colors.gray,
+      [''] = colors.gray,
+      V      = colors.gray,
+      c      = colors.magenta,
+      no     = colors.red,
+      s      = colors.orange,
+      S      = colors.orange,
       [''] = colors.orange,
-      ic = colors.yellow,
-      R = colors.violet,
-      Rv = colors.violet,
-      cv = colors.red,
-      ce = colors.red,
-      r = colors.cyan,
-      rm = colors.cyan,
+      ic     = colors.yellow,
+      R      = colors.orange,
+      Rv     = colors.orange,
+      cv     = colors.red,
+      ce     = colors.red,
+      r      = colors.cyan,
+      rm     = colors.cyan,
       ['r?'] = colors.cyan,
-      ['!'] = colors.red,
-      t = colors.red,
+      ['!']  = colors.red,
+      t      = colors.red,
     }
-    return { fg = mode_color[vim.fn.mode()] }
+    return { fg = colors.black, bg = mode_color[vim.fn.mode()] }
   end,
-  padding = { right = 1 },
-}
-
-ins_left {
-  -- filesize component
-  'filesize',
-  cond = conditions.buffer_not_empty,
+  padding = { left = 1, right = 1 },
 }
 
 ins_left {
   'filename',
   cond = conditions.buffer_not_empty,
-  color = { fg = colors.magenta, gui = 'bold' },
+  color = { fg = colors.white, gui = 'bold' },
 }
 
-ins_left { 'location' }
-
-ins_left { 'progress', color = { fg = colors.fg, gui = 'bold' } }
-
 ins_left {
-  'diagnostics',
-  sources = { 'nvim_diagnostic' },
-  symbols = { error = ' ', warn = ' ', info = ' ' },
-  diagnostics_color = {
-    color_error = { fg = colors.red },
-    color_warn = { fg = colors.yellow },
-    color_info = { fg = colors.cyan },
-  },
+  'branch',
+  icon = '',
+  color = { fg = colors.magenta, gui = 'bold' },
 }
 
 -- Insert mid section. You can make any number of sections in neovim :)
@@ -156,66 +133,83 @@ ins_left {
 }
 
 ins_left {
-  -- Lsp server name .
-  function()
-    local msg = 'No Active Lsp'
-    local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
-    local clients = vim.lsp.get_active_clients()
-    if next(clients) == nil then
-      return msg
-    end
-    for _, client in ipairs(clients) do
-      local filetypes = client.config.filetypes
-      if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-        return client.name
-      end
-    end
-    return msg
-  end,
-  icon = ' LSP:',
-  color = { fg = '#ffffff', gui = 'bold' },
-}
-
--- Add components to right sections
-ins_right {
-  'o:encoding', -- option component same as &encoding in viml
-  fmt = string.upper, -- I'm not sure why it's upper case either ;)
-  cond = conditions.hide_in_width,
-  color = { fg = colors.green, gui = 'bold' },
-}
-
-ins_right {
-  'fileformat',
-  fmt = string.upper,
-  icons_enabled = false, -- I think icons are cool but Eviline doesn't have them. sigh
-  color = { fg = colors.green, gui = 'bold' },
-}
-
-ins_right {
-  'branch',
-  icon = '',
-  color = { fg = colors.violet, gui = 'bold' },
-}
-
-ins_right {
   'diff',
   -- Is it me or the symbol for modified us really weird
-  symbols = { added = ' ', modified = '柳 ', removed = ' ' },
+  symbols = { added = ' ', modified = '柳', removed = ' ' },
   diff_color = {
-    added = { fg = colors.green },
+    added    = { fg = colors.green },
     modified = { fg = colors.orange },
-    removed = { fg = colors.red },
+    removed  = { fg = colors.red },
   },
   cond = conditions.hide_in_width,
 }
 
-ins_right {
-  function()
-    return '▊'
-  end,
-  color = { fg = colors.blue },
-  padding = { left = 1 },
+ins_left {
+  'diagnostics',
+  sources = { 'nvim_diagnostic' },
+  symbols = { error = ' ', warn = ' ', info = ' ' },
+  diagnostics_color = {
+    color_error = { fg = colors.red },
+    color_warn  = { fg = colors.yellow },
+    color_info  = { fg = colors.white },
+  },
 }
+
+--ins_left {
+--  -- Lsp server name .
+--  function()
+--    local msg = 'No Active Lsp'
+--    local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
+--    local clients = vim.lsp.get_active_clients()
+--    if next(clients) == nil then
+--      return msg
+--    end
+--    for _, client in ipairs(clients) do
+--      local filetypes = client.config.filetypes
+--      if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
+--        return client.name
+--      end
+--    end
+--    return msg
+--  end,
+--  icon = ' LSP:',
+--  color = { fg = colors.gray, gui = 'bold' },
+--}
+
+-- Add components to right sections
+ins_right {
+  'fileformat',
+  fmt = string.upper,
+  icons_enabled = false, -- I think icons are cool but Eviline doesn't have them. sigh
+  color = { fg = colors.dark_gray, gui = 'bold' },
+}
+
+ins_right {
+  'o:encoding', -- option component same as &encoding in viml
+  fmt = string.upper, -- I'm not sure why it's upper case either ;)
+  cond = conditions.hide_in_width,
+  color = { fg = colors.dark_gray, gui = 'bold' },
+}
+
+ins_right {
+  -- filesize component
+  'filesize',
+  cond = conditions.buffer_not_empty,
+  color = { fg = colors.dark_gray, gui = 'bold' },
+}
+
+ins_right { 'progress', color = { fg = colors.fg, gui = 'bold' } }
+
+ins_right { 'location', color = { fg = colors.fg, gui = 'bold' } }
+
+
+--ins_right {
+--  function()
+--    return '▊'
+--  end,
+--  color = { fg = colors.blue },
+--  padding = { left = 1 },
+--}
 
 -- Now don't forget to initialize lualine
 lualine.setup(config)
