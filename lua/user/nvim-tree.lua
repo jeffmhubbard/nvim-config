@@ -12,7 +12,7 @@ local tree_cb = nvim_tree_config.nvim_tree_callback
 
 nvim_tree.setup {
   update_focused_file = {
-    enable = true,
+    enable     = true,
     update_cwd = true,
   },
   renderer = {
@@ -21,24 +21,24 @@ nvim_tree.setup {
       glyphs = {
         default = "",
         symlink = "",
-        folder = {
-          arrow_open = "",
+        folder  = {
+          arrow_open   = "",
           arrow_closed = "",
-          default = "",
-          open = "",
-          empty = "",
-          empty_open = "",
-          symlink = "",
+          default      = "",
+          open         = "",
+          empty        = "",
+          empty_open   = "",
+          symlink      = "",
           symlink_open = "",
         },
         git = {
-          unstaged = "",
-          staged = "S",
-          unmerged = "",
-          renamed = "➜",
-          untracked = "U",
-          deleted = "",
-          ignored = "◌",
+          unstaged     = "",
+          staged       = "✚",
+          unmerged     = "═",
+          renamed      = "➜",
+          untracked    = "✱",
+          deleted      = "",
+          ignored      = "?",
         },
       },
     },
@@ -47,10 +47,10 @@ nvim_tree.setup {
     enable = true,
     show_on_dirs = true,
     icons = {
-      hint = "",
-      info = "",
+      hint    = "",
+      info    = "",
       warning = "",
-      error = "",
+      error   = "",
     },
   },
   view = {
@@ -60,6 +60,7 @@ nvim_tree.setup {
         { key = { "l", "<CR>", "o" }, cb = tree_cb "edit" },
         { key = "h", cb = tree_cb "close_node" },
         { key = "v", cb = tree_cb "vsplit" },
+        { key = "u", action = "dir_up" },
       },
     },
   },
