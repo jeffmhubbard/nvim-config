@@ -74,12 +74,13 @@ keymap("n", "<leader>6", ":BufferLineGoToBuffer 6<CR>", opts)
 keymap("n", "<leader>7", ":BufferLineGoToBuffer 7<CR>", opts)
 keymap("n", "<leader>8", ":BufferLineGoToBuffer 8<CR>", opts)
 keymap("n", "<leader>9", ":BufferLineGoToBuffer 9<CR>", opts)
+keymap("n", "<leader>0", ":BufferLineGoToBuffer 10<CR>", opts)
 
 -- Git
 keymap("n", "<leader>gg", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", opts)
 
 -- Comment
-keymap("n", "<leader>/", "<cmd>lua require('Comment.api').toggle_current_linewise()<CR>", opts)
+keymap("n", "<leader>/", "<cmd>lua require('Comment.api').toggle.current_linewise()<CR>", opts)
 keymap("x", "<leader>/", '<ESC><CMD>lua require("Comment.api").toggle_linewise_op(vim.fn.visualmode())<CR>')
 
 -- DAP
