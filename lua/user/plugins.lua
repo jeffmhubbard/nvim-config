@@ -88,11 +88,6 @@ return packer.startup(function(use)
   -- Git
   use { "lewis6991/gitsigns.nvim" }
 
-  -- DAP
-  use { "mfussenegger/nvim-dap" }
-  use { "rcarriga/nvim-dap-ui" }
-  use { "ravenxrz/DAPInstall.nvim" }
-
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if PACKER_BOOTSTRAP then
