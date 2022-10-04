@@ -36,8 +36,8 @@ bufferline.setup {
     },
 
     tab_selected = {
-      fg = { attribute = "fg", highlight = "Normal" },
-      bg = { attribute = "bg", highlight = "Normal" },
+      fg = { attribute = "fg", highlight = "TabLineSel" },
+      bg = { attribute = "bg", highlight = "TabLineSel" },
     },
     tab = {
       fg = { attribute = "fg", highlight = "TabLine" },

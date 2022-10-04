@@ -18,6 +18,11 @@ toggleterm.setup({
 	float_opts = {
 		border = "curved",
 	},
+  highlights = {
+    FloatBorder = {
+      guifg = "#383c3e",
+    },
+  },
 })
 
 function _G.set_terminal_keymaps()
