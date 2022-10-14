@@ -5,20 +5,26 @@ local lualine = require('lualine')
 
 -- Color table for highlights
 -- stylua: ignore
+-- use default Xterm colors since termguicolors = false
 local colors = {
-  bg        = '#1d2021',
-  fg        = '#d5d5d5',
-  black     = '#383c3e',
-  red       = '#d72638',
-  green     = '#88b92d',
-  orange    = '#eb8413',
-  blue      = '#1e8bac',
-  magenta   = '#be4264',
-  cyan      = '#1ba595',
-  gray      = '#dddddd',
-  dark_gray = '#53585b',
-  yellow    = '#f19d1a',
-  white     = '#e5e5e5',
+  bg            = '#000000',
+  fg            = '#c0c0c0',
+  black         = '#000000',
+  dark_red      = '#800000',
+  dark_green    = '#008000',
+  dark_yellow   = '#808000',
+  dark_blue     = '#000080',
+  dark_magenta  = '#800080',
+  dark_cyan     = '#008080',
+  gray          = '#c0c0c0',
+  dark_gray     = '#808080',
+  red           = '#ff0000',
+  green         = '#00ff00',
+  yellow        = '#ffff00',
+  blue          = '#0000ff',
+  magenta       = '#ff00ff',
+  cyan          = '#00ffff',
+  white         = '#ffffff',
 }
 
 local conditions = {
@@ -45,8 +51,8 @@ local config = {
       -- We are going to use lualine_c an lualine_x as left and
       -- right section. Both are highlighted by c theme .  So we
       -- are just setting default looks o statusline
-      normal = { c = { fg = colors.fg, bg = colors.bg } },
-      inactive = { c = { fg = colors.fg, bg = colors.bg } },
+      normal = { c = { fg = colors.fg } },
+      inactive = { c = { fg = colors.fg } },
     },
   },
   sections = {
@@ -86,19 +92,19 @@ ins_left {
   color = function()
     -- auto change color according to neovims mode
     local mode_color = {
-      n      = colors.cyan,
+      n      = colors.dark_cyan,
       i      = colors.white,
       v      = colors.gray,
       [''] = colors.gray,
       V      = colors.gray,
       c      = colors.magenta,
       no     = colors.red,
-      s      = colors.orange,
-      S      = colors.orange,
-      [''] = colors.orange,
+      s      = colors.dark_yellow,
+      S      = colors.dark_yellow,
+      [''] = colors.dark_yellow,
       ic     = colors.yellow,
-      R      = colors.orange,
-      Rv     = colors.orange,
+      R      = colors.dark_yellow,
+      Rv     = colors.dark_yellow,
       cv     = colors.red,
       ce     = colors.red,
       r      = colors.cyan,
@@ -138,7 +144,7 @@ ins_left {
   symbols = { added = ' ', modified = '柳', removed = ' ' },
   diff_color = {
     added    = { fg = colors.green },
-    modified = { fg = colors.orange },
+    modified = { fg = colors.dark_yellow },
     removed  = { fg = colors.red },
   },
   cond = conditions.hide_in_width,
